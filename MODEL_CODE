@@ -1,0 +1,114 @@
+### Checking with models for hign Performance with time Complexity
+
+if __name__ == "__main__": 
+    dataset_path = r"C:\ML_DL_Files\dataset\Person_1"  # Replace with your dataset path 
+
+ 
+
+    print("------------------Loading dataset---------------") 
+
+    print() 
+
+    start_loading_time = time.time() 
+
+    X, y = load_dataset(dataset_path) 
+
+    loading_time = time.time() - start_loading_time 
+
+    print(f"Dataset loaded in {loading_time} seconds") 
+
+ 
+
+    best_accuracy_rf = 0 
+
+    best_accuracy_svm = 0 
+
+    best_model_rf, best_model_svm = None, None 
+
+    best_encoder_rf, best_encoder_svm = None, None 
+
+    all_results_rf = []  # Store all accuracy results for Random Forest 
+
+    all_results_svm = []  # Store all accuracy results for SVM 
+
+ 
+
+    # Evaluate Random Forest 
+
+    for test_size in [0.1, 0.2, 0.3]: 
+
+        print(f"Evaluating Random Forest with test size {test_size * 100}%") 
+
+        accuracy_rf, model_rf, label_encoder_rf, results_rf = train_and_evaluate_random_forest(X, y, test_size) 
+
+        all_results_rf.append(results_rf)  # Append the results for Random Forest 
+
+        if accuracy_rf > best_accuracy_rf: 
+
+            best_accuracy_rf = accuracy_rf 
+
+            best_model_rf, best_encoder_rf = model_rf, label_encoder_rf 
+
+ 
+
+    # Evaluate SVM 
+
+    for test_size in [0.1, 0.2, 0.3]: 
+
+        print(f"Evaluating SVM with test size {test_size * 100}%") 
+
+        accuracy_svm, model_svm, label_encoder_svm, results_svm = train_and_evaluate_svm(X, y, test_size) 
+
+        all_results_svm.append(results_svm)  # Append the results for SVM 
+
+        if accuracy_svm > best_accuracy_svm: 
+
+            best_accuracy_svm = accuracy_svm 
+
+            best_model_svm, best_encoder_svm = model_svm, label_encoder_svm 
+
+     
+
+    # Print all accuracy results for Random Forest and SVM 
+
+    print("\nAll Accuracy Results for Random Forest:") 
+
+    for result_rf in all_results_rf: 
+
+        print(f"Test Size: {result_rf['test_size'] * 100}% - Accuracy: {result_rf['accuracy']}") 
+
+        print(f"Predicted Emotions: {result_rf['predicted_emotions']}\n") 
+
+     
+
+    print("\nAll Accuracy Results for SVM:") 
+
+    for result_svm in all_results_svm: 
+
+        print(f"Test Size: {result_svm['test_size'] * 100}% - Accuracy: {result_svm['accuracy']}") 
+
+        print(f"Predicted Emotions: {result_svm['predicted_emotions']}\n") 
+
+ 
+
+    print("Best accuracy achieved by Random Forest:", best_accuracy_rf) 
+
+    print("Best accuracy achieved by SVM:", best_accuracy_svm) 
+
+ 
+
+    print("\nModel Accuracy Comparison") 
+
+    print("------------------------------------------------")	 
+
+    print("Models                 | ACCURACY ") 
+
+    print("------------------------------------------------") 
+
+    print(f"Random Forest         | {best_accuracy_rf}")  
+
+    print(f"SVM                   | {best_accuracy_svm}") 
+
+    # Include other models like ANN here if you have them 
+
+    print("------------------------------------------------") 
