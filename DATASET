@@ -1,0 +1,19 @@
+The dataset is structured hierarchically to classify emotional states (Angry, Sad, Happy, Normal) based on signature variations. 
+Each individual has a unique folder containing subfolders for different emotions, with multiple signature samples under each category. 
+
+FLOW CHART REPRESENTATION
+📁 Dataset
+│
+├── 📂 Person1
+│   ├── 📂 Angry → [signature1.png, signature2.png, ...]
+│   ├── 📂 Sad → [signature1.png, signature2.png, ...]
+│   ├── 📂 Happy → [signature1.png, signature2.png, ...]
+│   ├── 📂 Normal → [signature1.png, signature2.png, ...]
+│
+├── 📂 Person2
+│   ├── 📂 Angry → [signature1.png, signature2.png, ...]
+│   ├── 📂 Sad → [signature1.png, signature2.png, ...]
+│   ├── 📂 Happy → [signature1.png, signature2.png, ...]
+│   ├── 📂 Normal → [signature1.png, signature2.png, ...]
+│
+└── (More individuals follow the same structure)
